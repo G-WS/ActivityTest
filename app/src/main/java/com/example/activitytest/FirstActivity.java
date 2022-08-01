@@ -31,6 +31,7 @@ public class FirstActivity extends AppCompatActivity {
                 Log.d("data", "onClick: ");
                 startActivity(intent);
             }
+
         });
     }
 
