@@ -3,9 +3,11 @@ package com.example.activitytest;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,7 +24,12 @@ public class FirstActivity extends AppCompatActivity {
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(FirstActivity.this, "you click Button1", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(FirstActivity.this, "you click Button1", Toast.LENGTH_SHORT).show();
+//                Intent intent = new Intent(FirstActivity.this,SecondActivity.class);
+                Intent intent = new Intent("com/example/activitytest.ACTION_START");
+                intent.addCategory("com/example/activitytest.MY_CATEGORY");
+                Log.d("data", "onClick: ");
+                startActivity(intent);
             }
         });
     }
