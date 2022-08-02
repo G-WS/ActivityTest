@@ -34,6 +34,7 @@ public class FirstActivity extends AppCompatActivity {
                 intent.addCategory("com/example/activitytest.MY_CATEGORY");
                 Log.d("data", "onClick: ");
                 startActivity(intent);
+
             }
         });
 //        Button button1 = (Button) findViewById(R.id.button_1);
