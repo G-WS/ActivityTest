@@ -1,8 +1,14 @@
 package com.example.activitytest;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -14,6 +20,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import java.io.FileReader;
 
 public class FirstActivity extends AppCompatActivity {
 
@@ -29,11 +37,16 @@ public class FirstActivity extends AppCompatActivity {
 //                Toast.makeText(FirstActivity.this, "you click Button1", Toast.LENGTH_SHORT).show();
                 //跳转到第二个activity
 //                Intent intent = new Intent(FirstActivity.this,SecondActivity.class);
-                //使用隐式intent启动活动
-                Intent intent = new Intent("com/example/activitytest.ACTION_START");
-                intent.addCategory("com/example/activitytest.MY_CATEGORY");
-                Log.d("data", "onClick: ");
-                startActivity(intent);
+//                //使用隐式intent启动活动
+//                Intent intent = new Intent("com/example/activitytest.ACTION_START");
+//                intent.addCategory("com/example/activitytest.MY_CATEGORY");
+//                Log.d("data", "onClick: ");
+//                //向下一个活动传递参数
+//                String data = "hello Second Activity";
+//                Intent intent = new Intent(FirstActivity.this,SecondActivity.class);
+//                intent.putExtra("extra_data",data);
+//                startActivity(intent);
+                mStartForResult.launch(new Intent(FirstActivity.this, SecondActivity.class));
 
             }
         });
@@ -50,6 +63,19 @@ public class FirstActivity extends AppCompatActivity {
 //            }
 //        });
     }
+
+    //获取回调信息
+    ActivityResultLauncher<Intent> mStartForResult = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+        @Override
+        public void onActivityResult(ActivityResult result) {
+            if (result.getResultCode() == Activity.RESULT_OK) {
+//                Log.d("FirstActivity", String.valueOf(result.getResultCode()+" "+Activity.RESULT_OK));;
+                Intent intent = result.getData();
+                String returndata = intent.getStringExtra("data_return");
+                Log.d("FirstActivity", returndata);
+            }
+        }
+    });
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
