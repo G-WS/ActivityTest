@@ -25,9 +25,9 @@ public class FirstActivity extends AppCompatActivity {
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                    //Toast显示
+                //Toast显示
 //                Toast.makeText(FirstActivity.this, "you click Button1", Toast.LENGTH_SHORT).show();
-        //跳转到第二个activity
+                //跳转到第二个activity
 //                Intent intent = new Intent(FirstActivity.this,SecondActivity.class);
                 //使用隐式intent启动活动
                 Intent intent = new Intent("com/example/activitytest.ACTION_START");
