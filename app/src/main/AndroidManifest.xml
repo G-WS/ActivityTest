@@ -13,30 +13,33 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ActivityTest"
         tools:targetApi="31">
-        <activity android:name=".ThirdActivity"
-            android:exported="true"
-            >
+        <activity
+            android:name=".ThirdActivity"
+            android:exported="true">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".FirstActivity" />
             <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
-                <data android:scheme="http"/>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="http" />
             </intent-filter>
         </activity>
 
         <activity
             android:name=".SecondActivity"
             android:exported="true"
-            android:parentActivityName=".FirstActivity"
-            >
+            android:launchMode="singleInstance"
+            android:parentActivityName=".FirstActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".FirstActivity" />
             <intent-filter>
                 <action android:name="com/example/activitytest.ACTION_START" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="com/example/activitytest.MY_CATEGORY" />
                 <!-- <data android:scheme="http"/> -->
@@ -47,7 +50,8 @@
         <activity
             android:name=".FirstActivity"
             android:exported="true"
-            android:label="this is a activity">
+            android:label="this is a activity"
+            android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

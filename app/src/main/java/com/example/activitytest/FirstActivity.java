@@ -23,11 +23,14 @@ import android.widget.Toast;
 
 import java.io.FileReader;
 
-public class FirstActivity extends AppCompatActivity {
+public class FirstActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //活动的启动模式测试
+//        Log.d("FirstActivity", this.toString());
+        Log.d("FirstActivity", "task id is:" + getTaskId());
         setContentView(R.layout.first_layout);
         Button button1 = (Button) findViewById(R.id.button_1);
         button1.setOnClickListener(new View.OnClickListener() {
@@ -45,8 +48,13 @@ public class FirstActivity extends AppCompatActivity {
 //                String data = "hello Second Activity";
 //                Intent intent = new Intent(FirstActivity.this,SecondActivity.class);
 //                intent.putExtra("extra_data",data);
+                //测试活动的启动模式
+//                Intent intent = new Intent(FirstActivity.this,FirstActivity.class);
+//                Intent intent = new Intent(FirstActivity.this, SecondActivity.class);
 //                startActivity(intent);
-                mStartForResult.launch(new Intent(FirstActivity.this, SecondActivity.class));
+                SecondActivity.actionStart(FirstActivity.this,"data1","data2");
+//                //回调信息测试
+//                mStartForResult.launch(new Intent(FirstActivity.this, SecondActivity.class));
 
             }
         });
@@ -95,5 +103,11 @@ public class FirstActivity extends AppCompatActivity {
             default:
         }
         return true;
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.d("FirstActivity", "onStart");
     }
 }

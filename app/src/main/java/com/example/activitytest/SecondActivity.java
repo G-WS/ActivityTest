@@ -2,6 +2,7 @@ package com.example.activitytest;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -9,19 +10,26 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-public class SecondActivity extends AppCompatActivity {
-
+public class SecondActivity extends BaseActivity {
+   public  static void actionStart(Context context,String data1,String data2){
+       Intent intent = new Intent(context,SecondActivity.class);
+       intent.putExtra("param1","data1");
+       intent.putExtra("param2","data2");
+       context.startActivity(intent);
+   }
     @Override
     public void onBackPressed() {
         Intent intent = new Intent();
-        intent.putExtra("data_return","hello FirstActivity");
-        setResult(RESULT_OK,intent);
+        intent.putExtra("data_return", "hello FirstActivity");
+        setResult(RESULT_OK, intent);
         finish();
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d("SecondActivity", "task id is:" + getTaskId());
+
         setContentView(R.layout.second_layout);
 ////向下一个活动传递数据
 //        Intent intent = getIntent();
@@ -32,10 +40,14 @@ public class SecondActivity extends AppCompatActivity {
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent();
-                intent.putExtra("data_return","hello FirstActivity");
-                setResult(RESULT_OK,intent);
-                finish();
+//                //回传数据测试
+//                Intent intent = new Intent();
+//                intent.putExtra("data_return","hello FirstActivity");
+//                setResult(RESULT_OK,intent);
+//                finish();
+                //活动的启动模式测试
+                Intent intent = new Intent(SecondActivity.this, ThirdActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -52,5 +64,11 @@ public class SecondActivity extends AppCompatActivity {
 //                startActivity(intent);
 //            }
 //        });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d("SecondActivity", "onDestroy");
     }
 }
